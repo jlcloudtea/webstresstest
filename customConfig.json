@@ -1,0 +1,15 @@
+{
+  "commands": [
+    "#!/bin/bash",
+    "apt update -y",
+    "apt install -y software-properties-common",
+    "add-apt-repository universe",
+    "apt install -y apache2 php stress unzip git",
+    "systemctl enable apache2",
+    "systemctl start apache2",
+    "cd /var/www/html",
+    "wget https://github.com/jlcloudtea/webstresstest/archive/master.zip",
+    "unzip master.zip",
+    "unzip webstresstest-main/vm-stress.zip /var/www/html"
+  ]
+}

@@ -8,8 +8,7 @@
     "systemctl enable apache2",
     "systemctl start apache2",
     "cd /var/www/html",
-    "wget https://github.com/jlcloudtea/webstresstest/archive/master.zip",
-    "unzip master.zip",
-    "unzip webstresstest-main/vm-stress.zip /var/www/html"
+    "wget https://github.com/jlcloudtea/webstresstest/raw/main/vm-stress.zip",
+    "unzip vm-stress.zip /var/www/html"
   ]
 }

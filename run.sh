@@ -10,6 +10,7 @@ export VM_IMAGE=Ubuntu2204
 read -p "Enter Resource Group Name: " RESOURCE_GROUP_NAME
 read -p "Enter VM username: " ADMIN_USERNAME
 read -p "Enter VM Name: " VM_NAME
+read -p "Enter Network Security Group Name: " NSG_NAME
 
 # Use the input variables as needed
 echo "Resource Group Name: $RESOURCE_GROUP_NAME"
@@ -30,12 +31,14 @@ az vm create \
   --admin-username $ADMIN_USERNAME \
   --generate-ssh-keys \
   --public-ip-sku Standard
-  --custom-script-extension \
-    name="customScript" \
-    location="$RESOURCE_GROUP_NAME" \
-    file-path="customConfig.json" \
-    type="RunOnce"
-    
+
+  az vm extension set \
+  --resource-group $RESOURCE_GROUP_NAME \
+  --vm-name $VM_NAME \
+  --name customScript \
+  --publisher Microsoft.Azure.Extensions \
+  --settings '{"fileUris": ["https://github.com/jlcloudtea/webstresstest/raw/main/customConfig.sh"], "commandToExecute": "./customConfig.sh"}'
+
 #Retrieve and store the IP address
 export IP_ADDRESS=$(az vm show --show-details --resource-group $RESOURCE_GROUP_NAME --name $VM_NAME --query publicIps --output tsv)
 

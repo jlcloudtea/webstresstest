@@ -37,7 +37,7 @@ az vm create \
   --vm-name $VM_NAME \
   --name customScript \
   --publisher Microsoft.Azure.Extensions \
-  --settings '{"fileUris": ["https://github.com/jlcloudtea/webstresstest/raw/main/customConfig.sh"], "commandToExecute": "./customConfig.sh"}'
+  --settings '{"fileUris": ["https://raw.githubusercontent.com/jlcloudtea/webstresstest/main/customConfig.sh"], "commandToExecute": "./customConfig.sh"}'
 
 #Retrieve and store the IP address
 export IP_ADDRESS=$(az vm show --show-details --resource-group $RESOURCE_GROUP_NAME --name $VM_NAME --query publicIps --output tsv)
